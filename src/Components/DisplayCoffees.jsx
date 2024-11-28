@@ -1,8 +1,40 @@
 import React from 'react';
 import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const DisplayCoffees = ({ coffee }) => {
-    const { name, chef, supplier, taste, category, details, photo } = coffee;
+    const { name, chef, _id, taste, category, details, photo } = coffee;
+
+    const handleDelete = _id => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+             
+                fetch(`http://localhost:5000/coffee/${_id}`, {
+                    method: 'DELETE'
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if(data.deletedCount > 0){
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your Coffee has been deleted.",
+                            icon: "success"
+                          });
+                    }
+                })
+            }
+          });
+    }
+
 
     return (
         <div className="flex items-center bg-[#F3F4F6] rounded-lg shadow-lg p-4 mx-auto my-4 max-w-4xl border border-gray-300">
@@ -37,11 +69,17 @@ const DisplayCoffees = ({ coffee }) => {
                     <FaEye size={24} />
                     <span className="text-xs font-medium mt-1">View</span>
                 </button>
-                <button className="text-green-500 hover:text-green-700 transition flex flex-col items-center">
+                
+                
+               <Link to={`/updateCoffee/${_id}`}>
+               <button className="text-green-500 hover:text-green-700 transition flex flex-col items-center">
                     <FaEdit size={24} />
                     <span className="text-xs font-medium mt-1">Edit</span>
                 </button>
-                <button className="text-red-500 hover:text-red-700 transition flex flex-col items-center">
+               </Link>
+                
+
+                <button onClick={() => handleDelete(_id)} className="text-red-500 hover:text-red-700 transition flex flex-col items-center">
                     <FaTrash size={24} />
                     <span className="text-xs font-medium mt-1">Delete</span>
                 </button>

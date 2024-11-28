@@ -1,10 +1,13 @@
 import React from "react";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const AddNewCoffee = () => {
+    const navigate = useNavigate();
 
-    const handleAddCoffee = e => {
-        e.preventDefault()
+    const handleAddCoffee = (e) => {
+        e.preventDefault();
 
         const form = e.target;
 
@@ -15,30 +18,35 @@ const AddNewCoffee = () => {
         const category = form.category.value;
         const details = form.details.value;
         const photo = form.photo.value;
-        const newCoffee = { name, chef, supplier, taste, category, details, photo }
+        const newCoffee = { name, chef, supplier, taste, category, details, photo };
 
         fetch('http://localhost:5000/coffee', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(newCoffee)
+            body: JSON.stringify(newCoffee),
         })
-            .then(res => res.json())
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => {
                 if (data.insertedId) {
+                    console.log(data)
                     Swal.fire({
                         title: 'Success!',
                         text: 'Coffee Added Successfully',
                         icon: 'success',
-                        confirmButtonText: 'Cool'
-                    })
+                        confirmButtonText: 'Cool',
+                    });
                 }
-            })
-
-
-    }
+            });
+    };
 
     return (
-        <div className="min-h-screen bg-[#f4f3f0] flex items-center justify-center">
+        <div className="min-h-screen bg-[#f4f3f0] flex flex-col items-center justify-center">
+            <button
+                className="self-start ml-4 mb-4 bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-600 focus:outline-none flex items-center"
+                onClick={() => navigate('/')}
+            >
+                <FaArrowLeft className="mr-2" /> Home
+            </button>
             <div className="bg-white p-8 shadow-lg rounded-lg w-full max-w-3xl">
                 <h2 className="text-2xl font-bold text-center mb-4">Add New Coffee</h2>
                 <p className="text-gray-600 text-center mb-6">
