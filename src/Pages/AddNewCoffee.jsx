@@ -16,7 +16,6 @@ const AddNewCoffee = () => {
         const details = form.details.value;
         const photo = form.photo.value;
         const newCoffee = { name, chef, supplier, taste, category, details, photo }
-        console.log(newCoffee)
 
         fetch('http://localhost:5000/coffee', {
             method: 'POST',
@@ -107,6 +106,7 @@ const AddNewCoffee = () => {
                             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                         />
                     </div>
+
                     <div>
                         <label className="block text-gray-700 font-medium mb-1" htmlFor="details">
                             Details
@@ -119,6 +119,7 @@ const AddNewCoffee = () => {
                             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                         />
                     </div>
+
                     <div className="md:col-span-2">
                         <label className="block text-gray-700 font-medium mb-1" htmlFor="photo">
                             Photo

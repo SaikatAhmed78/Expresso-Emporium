@@ -10,34 +10,37 @@ import cupImage8 from '../../src/assets/cups/Rectangle 16.png';
 
 const Cups = () => {
     return (
-        <div className="bg-gray-100 py-8">
-            <h5 className='text-center'>Follow Us Now</h5>
-            <h2 className="text-3xl font-bold text-center mb-8 text-[#331A15]">Follow On Instagram</h2>
-            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="overflow-hidden rounded-lg">
-                    <img src={cupImage1} alt="Cup 1" className="w-full h-full object-cover" />
-                </div>
-                <div className="overflow-hidden rounded-lg">
-                    <img src={cupImage2} alt="Cup 2" className="w-full h-full object-cover" />
-                </div>
-                <div className="overflow-hidden rounded-lg">
-                    <img src={cupImage3} alt="Cup 3" className="w-full h-full object-cover" />
-                </div>
-                <div className="overflow-hidden rounded-lg">
-                    <img src={cupImage4} alt="Cup 4" className="w-full h-full object-cover" />
-                </div>
-                <div className="overflow-hidden rounded-lg">
-                    <img src={cupImage5} alt="Cup 5" className="w-full h-full object-cover" />
-                </div>
-                <div className="overflow-hidden rounded-lg">
-                    <img src={cupImage6} alt="Cup 6" className="w-full h-full object-cover" />
-                </div>
-                <div className="overflow-hidden rounded-lg">
-                    <img src={cupImage7} alt="Cup 7" className="w-full h-full object-cover" />
-                </div>
-                <div className="overflow-hidden rounded-lg">
-                    <img src={cupImage8} alt="Cup 8" className="w-full h-full object-cover" />
-                </div>
+        <div className="bg-gray-50 py-12 px-4">
+  
+            <div className="text-center mb-8">
+                <h5 className="text-lg font-medium text-gray-600 tracking-wider">Follow Us Now</h5>
+                <h2 className="text-4xl font-extrabold text-[#331A15] mt-2">
+                    Follow On Instagram
+                </h2>
+                <p className="text-gray-500 mt-3">
+                    Discover our latest designs and updates on Instagram. Stay connected with us!
+                </p>
+            </div>
+
+   
+            <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {[cupImage1, cupImage2, cupImage3, cupImage4, cupImage5, cupImage6, cupImage7, cupImage8].map(
+                    (image, index) => (
+                        <div
+                            key={index}
+                            className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 bg-white"
+                        >
+                            <img
+                                src={image}
+                                alt={`Cup ${index + 1}`}
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            />
+                            <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <p className="text-white font-bold text-lg">View More</p>
+                            </div>
+                        </div>
+                    )
+                )}
             </div>
         </div>
     );
