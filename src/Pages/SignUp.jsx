@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import signupImg from '../../src/assets/form/sign-up-concept-illustration_114360-7965.avif';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
-
-    const {creatUser} = useContext(AuthContext);
+    const { creatUser } = useContext(AuthContext);
 
     const handleSignUp = (e) => {
         e.preventDefault();
@@ -14,12 +14,39 @@ const SignUp = () => {
         const lastName = e.target.lastName.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(firstName, lastName, email, password)
+        console.log(firstName, lastName, email, password);
       
         creatUser(email, password)
-        .then(result => console.log(result.user))
-        .catch(error => console.log(error.message))
-        
+        .then(result => {
+            const createdAt = result?.user?.metadata?.creationTime;
+
+            const newUser = { firstName, lastName, email, createdAt };
+
+            fetch('http://localhost:5000/users', {
+                method: 'POST',
+                headers: {'content-type' : 'application/json'},
+                body: JSON.stringify(newUser)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.insertedId){
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Your account has been created successfully.',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
     };
 
     return (
@@ -33,6 +60,7 @@ const SignUp = () => {
                             type="text"
                             id="firstName"
                             name="firstName"
+                            placeholder="Enter your first name"
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#91572B] focus:border-[#91572B]"
                             required
                         />
@@ -43,6 +71,7 @@ const SignUp = () => {
                             type="text"
                             id="lastName"
                             name="lastName"
+                            placeholder="Enter your last name"
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#91572B] focus:border-[#91572B]"
                             required
                         />
@@ -53,6 +82,7 @@ const SignUp = () => {
                             type="email"
                             id="email"
                             name="email"
+                            placeholder="Enter your email address"
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#91572B] focus:border-[#91572B]"
                             required
                         />
@@ -63,6 +93,7 @@ const SignUp = () => {
                             type="password"
                             id="password"
                             name="password"
+                            placeholder="Create a password"
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#91572B] focus:border-[#91572B]"
                             required
                         />
