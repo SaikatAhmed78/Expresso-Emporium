@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaTwitter, FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { FaSignInAlt, FaUserPlus, FaSignOutAlt } from 'react-icons/fa';
 import logo from '../../src/assets/more/logo1.png';
+import { AuthContext } from '../Providers/AuthProvider';
 
 const Navbar = () => {
+    const { user, logout } = useContext(AuthContext);
+
     return (
         <nav className="bg-[#372727] text-white p-4 shadow-md">
             <div className="container mx-auto flex items-center justify-between">
@@ -44,16 +47,6 @@ const Navbar = () => {
                         Add Coffee
                     </NavLink>
                     <NavLink
-                        to="/signIn"
-                        className={({ isActive }) =>
-                            isActive
-                                ? "text-yellow-400 font-bold underline"
-                                : "hover:text-gray-400"
-                        }
-                    >
-                        SignIn
-                    </NavLink>
-                    <NavLink
                         to="/users"
                         className={({ isActive }) =>
                             isActive
@@ -68,18 +61,36 @@ const Navbar = () => {
                         placeholder="Search..."
                         className="px-4 py-2 rounded-lg focus:outline-none focus:ring focus:ring-yellow-500"
                     />
-                </div>
-
-                <div className="flex items-center space-x-4">
-                    <a href="#" className="hover:text-gray-400">
-                        <FaTwitter />
-                    </a>
-                    <a href="#" className="hover:text-gray-400">
-                        <FaFacebookF />
-                    </a>
-                    <a href="#" className="hover:text-gray-400">
-                        <FaInstagram />
-                    </a>
+                    {user ? (
+                        <button 
+                            onClick={logout} 
+                            className="flex items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">
+                            <FaSignOutAlt className="mr-2" /> Log Out
+                        </button>
+                    ) : (
+                        <>
+                            <NavLink
+                                to="/signUp"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "text-yellow-400 font-bold underline"
+                                        : "hover:text-gray-400"
+                                }
+                            >
+                                <FaUserPlus className="mr-1" /> Sign Up
+                            </NavLink>
+                            <NavLink
+                                to="/signIn"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "text-yellow-400 font-bold underline"
+                                        : "hover:text-gray-400"
+                                }
+                            >
+                                <FaSignInAlt className="mr-1" /> Sign In
+                            </NavLink>
+                        </>
+                    )}
                 </div>
 
                 <div className="lg:hidden">
@@ -139,27 +150,42 @@ const Navbar = () => {
                                 >
                                     Add Coffee
                                 </NavLink>
-
+                            </li>
+                            <li>
                                 <NavLink
-                        to="/signUp"
-                        className={({ isActive }) =>
-                            isActive
-                                ? "text-yellow-400 font-bold underline"
-                                : "hover:text-gray-400"
-                        }
-                    >
-                        SignUp
-                    </NavLink>
+                                    to="/users"
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? "text-yellow-400 font-bold underline"
+                                            : "hover:text-gray-400"
+                                    }
+                                >
+                                    Users
+                                </NavLink>
+                            </li>
+                            <li>
                                 <NavLink
-                        to="/users"
-                        className={({ isActive }) =>
-                            isActive
-                                ? "text-yellow-400 font-bold underline"
-                                : "hover:text-gray-400"
-                        }
-                    >
-                        Users
-                    </NavLink>
+                                    to="/signUp"
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? "text-yellow-400 font-bold underline"
+                                            : "hover:text-gray-400"
+                                    }
+                                >
+                                    Sign Up
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/signIn"
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? "text-yellow-400 font-bold underline"
+                                            : "hover:text-gray-400"
+                                    }
+                                >
+                                    Sign In
+                                </NavLink>
                             </li>
                             <li>
                                 <input
@@ -167,17 +193,6 @@ const Navbar = () => {
                                     placeholder="Search..."
                                     className="px-4 py-2 rounded-lg focus:outline-none focus:ring focus:ring-yellow-500"
                                 />
-                            </li>
-                            <li className="flex items-center space-x-4">
-                                <a href="#" className="hover:text-gray-400">
-                                    <FaTwitter />
-                                </a>
-                                <a href="#" className="hover:text-gray-400">
-                                    <FaFacebookF />
-                                </a>
-                                <a href="#" className="hover:text-gray-400">
-                                    <FaInstagram />
-                                </a>
                             </li>
                         </ul>
                     </div>

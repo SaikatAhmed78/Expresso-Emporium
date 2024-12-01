@@ -5,7 +5,7 @@ import { AuthContext } from '../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 
 const SignUp = () => {
-    const { creatUser } = useContext(AuthContext);
+    const { createUser } = useContext(AuthContext);
 
     const handleSignUp = (e) => {
         e.preventDefault();
@@ -16,7 +16,7 @@ const SignUp = () => {
         const password = e.target.password.value;
         console.log(firstName, lastName, email, password);
       
-        creatUser(email, password)
+        createUser(email, password)
         .then(result => {
             const createdAt = result?.user?.metadata?.creationTime;
 
