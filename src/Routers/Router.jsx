@@ -9,6 +9,7 @@ import About from '../Pages/About';
 import LearnMore from '../Components/LearnMore';
 import SignIn from '../Pages/SignIn';
 import SignUp from '../Pages/SignUp';
+import Users from '../Components/Users';
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
             {
                 path: '/signUp',
                 element: <SignUp></SignUp>
+            },
+            {
+                path: '/users',
+                element: <Users></Users>,
+                loader: () => fetch('http://localhost:5000/users')
             },
             {
                 path: '/learnMore',

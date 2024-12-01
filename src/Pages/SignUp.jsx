@@ -113,7 +113,6 @@ const SignUp = () => {
             </div>
             <img
                 src={signupImg}
-                alt="Sign Up"
                 className="hidden md:block w-1/2 h-auto rounded-lg shadow-lg ml-8"
             />
         </div>

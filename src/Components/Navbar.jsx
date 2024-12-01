@@ -53,6 +53,16 @@ const Navbar = () => {
                     >
                         SignIn
                     </NavLink>
+                    <NavLink
+                        to="/users"
+                        className={({ isActive }) =>
+                            isActive
+                                ? "text-yellow-400 font-bold underline"
+                                : "hover:text-gray-400"
+                        }
+                    >
+                        Users
+                    </NavLink>
                     <input
                         type="text"
                         placeholder="Search..."
@@ -131,14 +141,24 @@ const Navbar = () => {
                                 </NavLink>
 
                                 <NavLink
-                        to="/signIn"
+                        to="/signUp"
                         className={({ isActive }) =>
                             isActive
                                 ? "text-yellow-400 font-bold underline"
                                 : "hover:text-gray-400"
                         }
                     >
-                        SignIn
+                        SignUp
+                    </NavLink>
+                                <NavLink
+                        to="/users"
+                        className={({ isActive }) =>
+                            isActive
+                                ? "text-yellow-400 font-bold underline"
+                                : "hover:text-gray-400"
+                        }
+                    >
+                        Users
                     </NavLink>
                             </li>
                             <li>
