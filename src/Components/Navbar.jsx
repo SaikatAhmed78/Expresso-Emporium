@@ -43,6 +43,16 @@ const Navbar = () => {
                     >
                         Add Coffee
                     </NavLink>
+                    <NavLink
+                        to="/signIn"
+                        className={({ isActive }) =>
+                            isActive
+                                ? "text-yellow-400 font-bold underline"
+                                : "hover:text-gray-400"
+                        }
+                    >
+                        SignIn
+                    </NavLink>
                     <input
                         type="text"
                         placeholder="Search..."
@@ -119,6 +129,17 @@ const Navbar = () => {
                                 >
                                     Add Coffee
                                 </NavLink>
+
+                                <NavLink
+                        to="/signIn"
+                        className={({ isActive }) =>
+                            isActive
+                                ? "text-yellow-400 font-bold underline"
+                                : "hover:text-gray-400"
+                        }
+                    >
+                        SignIn
+                    </NavLink>
                             </li>
                             <li>
                                 <input
